@@ -1,0 +1,12 @@
+tag-field{
+	font-family: 'Arial', sans-serif;
+}
+
+.tag-field{
+	font-family: 'Arial', sans-serif;
+	margin-right: 2px;
+}
+
+.label-tag{
+	position: absolute;
+}
