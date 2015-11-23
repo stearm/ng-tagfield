@@ -9,9 +9,9 @@
 		return {
 			scope: {
 				tags: '=',
-				checkId : '@',
+				labelFor : '@',
 			},
-			template: '<label for="tagsfield" class="col-sm-2 control-label">Tags</label><div class="col-sm-6"><input id="{{checkId}}" type="text" class="form-control" ng-model="tagText" ng-keydown="processaInputTag(tagText,$event)"></input><span class="label-tag label label-primary" ng-repeat="tag in tags track by $index">{{tag}}</span></div>',
+			template: '<label for="tagsfield" class="col-sm-2 control-label">Tags</label><div class="col-sm-6"><input id="{{labelFor}}" type="text" class="form-control" ng-model="tagText" ng-keydown="processaInputTag(tagText,$event)"></input><span class="label-tag label label-primary" ng-repeat="tag in tags track by $index">{{tag}}</span></div>',
 			link: function(scope, element, attrs) {
 
 				var setCss = function() {
@@ -47,13 +47,14 @@
 					if (event.which == 188) {
 						event.preventDefault()
 						var newTag = tagText;
-						scope.tagText = "";
-
-						scope.tags.push(newTag);
-
+						// if text not contains only spaces
+						if (newTag.length){
+							scope.tags.push(newTag);
+						}
+						scope.tagText = null;
 					} else if (event.which == 8) {
 						// if there isn't text but only tag -> remove the last tag from the array
-						if (tagText == null || tagText == "") {
+						if (scope.tagText == null || scope.tagText == "") {
 							scope.tags.pop();
 						}
 					}
